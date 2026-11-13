@@ -1,51 +1,252 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="UTF-8">
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiz des châteaux – Forteresse Assiégée</title>
-<meta name="description" content="Quiz gratuit sur les châteaux : 8 questions sur les donjons, les douves et les grands monuments.">
+<title>Quiz d’actualité du Burkina Faso</title>
+<meta name="description" content="Huit questions pour tester vos connaissances sur l’actualité du Burkina Faso du 2 au 8 novembre 2026.">
 <link rel="stylesheet" href="style.css">
-<!-- AdSense : collez ici le même script que dans index.html -->
-</head><body>
-<header><a class="logo" href="index.html">Forteresse Assiégée</a>
-<nav><a href="index.html">Défense</a><a href="jeux.html">Tous les jeux</a><a href="comment-jouer.html">Comment jouer</a><a href="a-propos.html">À propos</a><a href="privacy.html">Confidentialité</a></nav></header>
+<style>
+/* Styles de secours : le quiz reste lisible même si style.css ne définit pas ces classes. */
+.quiz-sources { margin-top: 1rem; padding: 1rem; border-left: 3px solid currentColor; }
+.quiz-sources a { overflow-wrap: anywhere; }
+#o { display: grid; gap: .65rem; }
+.opt { display: block; width: 100%; text-align: left; cursor: pointer; }
+.opt:disabled { cursor: default; opacity: 1; }
+.opt.bon { border: 2px solid #238636; background: #e8f5e9; color: #14532d; }
+.opt.mauvais { border: 2px solid #c62828; background: #ffebee; color: #7f1d1d; }
+.msg { min-height: 2rem; }
+#explication { padding: .8rem; border-radius: .4rem; background: rgba(127,127,127,.10); }
+#explication a { font-weight: 600; }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">Forteresse Assiégée</a>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="jeux.html">Tous les jeux</a>
+    <a href="comment-jouer.html">Comment jouer</a>
+    <a href="a-propos.html">À propos</a>
+    <a href="privacy.html">Confidentialité</a>
+  </nav>
+</header>
+
 <main>
-<h1>Quiz des châteaux</h1>
-<p>Huit questions sur les châteaux forts et les grands châteaux du monde. Choisissez une réponse par question.</p>
-<div class="stats"><span>Question <b id="n">1</b>/8</span><span>Score : <b id="s">0</b></span></div>
-<h2 id="q"></h2><div id="o"></div><p class="msg" id="m" aria-live="polite"></p>
-<button class="btn" id="suite" hidden>Suivant</button>
+  <h1>Quiz d’actualité du Burkina Faso 🇧🇫</h1>
+  <p>Huit questions sur les faits marquants de la semaine du 2 au 8 novembre 2026 : décisions publiques, coopération, agriculture, société, artisanat et sport.</p>
+  <p><strong>Mise à jour : 13 novembre 2026</strong> · Période couverte : du 2 au 8 novembre 2026.</p>
+
+  <div class="stats" aria-live="polite">
+    <span>Question <b id="n">1</b>/8</span>
+    <span>Score : <b id="s">0</b></span>
+  </div>
+
+  <h2 id="q" tabindex="-1"></h2>
+  <div id="o"></div>
+  <p class="msg" id="m" aria-live="polite"></p>
+  <div id="explication" hidden aria-live="polite"></div>
+  <button class="btn" id="suite" hidden>Suivant</button>
+
+  <section class="quiz-sources">
+    <h2>Sources de cette édition</h2>
+    <ul>
+      <li><a href="https://www.presidencedufaso.bf/conseil-des-ministres-du-jeudi-5-novembre-2026/" target="_blank" rel="noopener">Présidence du Faso – Conseil des ministres du 5 novembre 2026</a></li>
+      <li><a href="https://www.presidencedufaso.bf/visite-damitie-et-de-travail-du-president-malien-au-burkina-faso/" target="_blank" rel="noopener">Présidence du Faso – Visite du président malien au Burkina Faso</a></li>
+      <li><a href="https://lefaso.net/?id_article=150603&page=impression" target="_blank" rel="noopener">LeFaso.net – Remise de 200 tracteurs au ministère de l’Agriculture</a></li>
+      <li><a href="https://siao.bf/siao-2026/" target="_blank" rel="noopener">Site officiel du SIAO – Édition 2026</a></li>
+      <li><a href="https://www.aib.media/?p=173788" target="_blank" rel="noopener">Agence d’Information du Burkina – Annonce du Maouloud à Tanghin</a></li>
+      <li><a href="https://www.presidencedufaso.bf/37e-tour-cycliste-international-du-faso/" target="_blank" rel="noopener">Présidence du Faso – Clôture du 37e Tour du Faso</a></li>
+    </ul>
+  </section>
+
+  <p><a href="jeux.html">Découvrir tous les jeux</a></p>
+</main>
+
+<footer>
+  © 2026 Forteresse Assiégée ·
+  <a href="jeux.html">Tous les jeux</a> ·
+  <a href="privacy.html">Confidentialité</a> ·
+  <a href="a-propos.html">À propos</a>
+</footer>
+
 <script>
-(()=>{
-const Q=[["Comment appelle-t-on la tour principale d’un château fort ?",["Le beffroi","Le donjon","La poterne","Le chemin de ronde"],1],
-["Comment s’appelle le fossé rempli d’eau autour d’un château ?",["Les douves","Les créneaux","Les meurtrières","Les mâchicoulis"],0],
-["Quel pont mobile permettait de fermer l’entrée d’un château ?",["Le pont-levis","Le pont-neuf","Le pont-aqueduc","Le pont suspendu"],0],
-["Quelle grille coulissante bloquait la porte d’un château ?",["La palissade","La herse","Le vantail","Le rideau"],1],
-["Dans quelle région de France se trouve le Mont-Saint-Michel ?",["Bretagne","Provence","Normandie","Alsace"],2],
-["Quel roi a installé la cour à Versailles ?",["Louis XIV","Charlemagne","Napoléon Ier","Henri IV"],0],
-["Dans quel pays se trouve le château de Neuschwanstein ?",["Autriche","Allemagne","Suisse","Pologne"],1],
-["Dans quelle ville espagnole se trouve l’Alhambra ?",["Séville","Madrid","Grenade","Tolède"],2]];
-let i=0,s=0,ok=false;const $=x=>document.getElementById(x);
-function aff(){
-  const[q,r]=Q[i];ok=false;$('q').textContent=q;$('n').textContent=i+1;$('m').textContent='';$('suite').hidden=true;$('o').innerHTML='';
-  r.forEach((t,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>rep(b,k);$('o').appendChild(b)});
-}
-function rep(b,k){
-  if(ok)return;ok=true;const bons=$('o').children;
-  if(k===Q[i][2]){s++;b.classList.add('bon');$('m').textContent='Bonne réponse !'}
-  else{b.classList.add('mauvais');bons[Q[i][2]].classList.add('bon');$('m').textContent='Raté : la bonne réponse est en vert.'}
-  $('s').textContent=s;$('suite').textContent=i<7?'Suivant':'Voir mon score';$('suite').hidden=false;
-}
-$('suite').onclick=()=>{
-  if(i<7){i++;aff()}
-  else if(i===7){i=8;$('q').textContent='Votre score : '+s+' sur 8';$('o').innerHTML='';
-    $('m').textContent=s>=7?'Excellent, vous êtes un vrai châtelain !':s>=4?'Bien joué, encore un essai pour faire mieux ?':'Un bon début, rejouez pour progresser.';
-    $('suite').textContent='Rejouer'}
-  else{i=0;s=0;$('s').textContent=0;aff()}
-};
-aff();
+(() => {
+  "use strict";
+
+  const Q = [
+    {
+      question: "Quelle nouvelle société d’État a été créée lors du Conseil des ministres du 5 novembre 2026 pour contribuer à la réorganisation du secteur minier artisanal ?",
+      choix: ["Faso SANU", "Faso Énergie", "Burkina Mines", "Faso Agricole"],
+      bonne: 0,
+      explication: "Le Conseil des ministres a adopté un décret portant création de Faso SANU, destinée à accompagner la réorganisation du sous-secteur minier artisanal.",
+      source: "https://www.presidencedufaso.bf/conseil-des-ministres-du-jeudi-5-novembre-2026/",
+      sourceNom: "Présidence du Faso – Conseil des ministres du 5 novembre 2026"
+    },
+    {
+      question: "Selon le compte rendu officiel, quelle est la répartition du capital de Faso SANU ?",
+      choix: ["100 % État central", "50 % SONASP et 50 % Trésor public", "60 % SONASP et 40 % secteur privé", "50 % collectivités et 50 % banques"],
+      bonne: 1,
+      explication: "La Présidence précise que Faso SANU sera détenue à parts égales par la Société nationale des substances précieuses (SONASP) et le Trésor public.",
+      source: "https://www.presidencedufaso.bf/conseil-des-ministres-du-jeudi-5-novembre-2026/",
+      sourceNom: "Présidence du Faso – Conseil des ministres du 5 novembre 2026"
+    },
+    {
+      question: "Quelle nouvelle structure le Conseil des ministres du 5 novembre a-t-il décidé de créer dans le domaine de la santé ?",
+      choix: ["L’Agence burkinabè de médecine traditionnelle", "L’Institut national de cardiologie", "L’Agence de santé scolaire", "Le Centre national de médecine sportive"],
+      bonne: 0,
+      explication: "Le compte rendu du Conseil des ministres mentionne explicitement la création de l’Agence burkinabè de médecine traditionnelle.",
+      source: "https://www.presidencedufaso.bf/conseil-des-ministres-du-jeudi-5-novembre-2026/",
+      sourceNom: "Présidence du Faso – Conseil des ministres du 5 novembre 2026"
+    },
+    {
+      question: "Quel responsable malien est arrivé à Ouagadougou le 5 novembre 2026 pour une visite d’amitié et de travail ?",
+      choix: ["Choguel Kokalla Maïga", "Assimi Goïta", "Abdoulaye Maïga", "Modibo Sidibé"],
+      bonne: 1,
+      explication: "La Présidence du Faso rapporte l’arrivée du Général d’armée Assimi Goïta à Ouagadougou le jeudi 5 novembre 2026.",
+      source: "https://www.presidencedufaso.bf/visite-damitie-et-de-travail-du-president-malien-au-burkina-faso/",
+      sourceNom: "Présidence du Faso – Visite du président malien au Burkina Faso"
+    },
+    {
+      question: "Combien de tracteurs ont été remis au ministère chargé de l’Agriculture le 6 novembre 2026 ?",
+      choix: ["100 tracteurs", "150 tracteurs", "200 tracteurs", "300 tracteurs"],
+      bonne: 2,
+      explication: "Le Bureau national des grands projets du Burkina a remis 200 tracteurs de 40 chevaux, accompagnés notamment de charrues et de herses, pour soutenir la mécanisation agricole.",
+      source: "https://lefaso.net/?id_article=150603&page=impression",
+      sourceNom: "LeFaso.net – Remise de 200 tracteurs au ministère de l’Agriculture"
+    },
+    {
+      question: "Quel était le thème de la 18e édition du Salon international de l’artisanat de Ouagadougou (SIAO) ?",
+      choix: ["L’artisanat africain et l’industrialisation", "L’artisanat et le tourisme durable", "La jeunesse et les métiers numériques", "Le patrimoine africain face au changement climatique"],
+      bonne: 0,
+      explication: "Le site officiel du SIAO indique le thème « Artisanat africain et industrialisation », autour de la valorisation des produits locaux et du patrimoine culturel.",
+      source: "https://siao.bf/siao-2026/",
+      sourceNom: "Site officiel du SIAO – Édition 2026"
+    },
+    {
+      question: "Dans quel quartier de Ouagadougou la Communauté internationale des soufis a-t-elle annoncé la célébration du Maouloud du 7 novembre 2026 ?",
+      choix: ["Gounghin", "Tanghin", "Pissy", "Dassasgho"],
+      bonne: 1,
+      explication: "L’Agence d’Information du Burkina a annoncé la commémoration à Tanghin, autour du thème « Cohésion sociale et tolérance religieuse ».",
+      source: "https://www.aib.media/?p=173788",
+      sourceNom: "Agence d’Information du Burkina – Commémoration du Maouloud"
+    },
+    {
+      question: "Quel coureur burkinabè a remporté le classement général du 37e Tour du Faso, clôturé le 8 novembre 2026 ?",
+      choix: ["Azzedine Lagab", "Youssef Bdadou", "Paul Daumont", "Gustav Basson"],
+      bonne: 2,
+      explication: "Paul Daumont a remporté le maillot jaune et réalisé un troisième succès consécutif. L’Algérien Azzedine Lagab a, lui, remporté la dernière étape.",
+      source: "https://www.presidencedufaso.bf/37e-tour-cycliste-international-du-faso/",
+      sourceNom: "Présidence du Faso – 37e Tour cycliste international du Faso"
+    }
+  ];
+
+  let i = 0;
+  let score = 0;
+  let repondu = false;
+
+  const $ = (id) => document.getElementById(id);
+  const questionEl = $("q");
+  const optionsEl = $("o");
+  const messageEl = $("m");
+  const explicationEl = $("explication");
+  const suiteBtn = $("suite");
+
+  function afficherQuestion() {
+    const item = Q[i];
+    repondu = false;
+    $("n").textContent = String(i + 1);
+    questionEl.textContent = item.question;
+    messageEl.textContent = "";
+    explicationEl.hidden = true;
+    explicationEl.textContent = "";
+    suiteBtn.hidden = true;
+    suiteBtn.textContent = i === Q.length - 1 ? "Voir mon score" : "Suivant";
+    optionsEl.replaceChildren();
+
+    item.choix.forEach((texte, index) => {
+      const bouton = document.createElement("button");
+      bouton.type = "button";
+      bouton.className = "opt";
+      bouton.textContent = texte;
+      bouton.addEventListener("click", () => verifierReponse(bouton, index));
+      optionsEl.appendChild(bouton);
+    });
+    questionEl.focus();
+  }
+
+  function verifierReponse(bouton, index) {
+    if (repondu) return;
+    repondu = true;
+
+    const item = Q[i];
+    const boutons = optionsEl.children;
+    Array.from(boutons).forEach((b) => { b.disabled = true; });
+
+    if (index === item.bonne) {
+      score++;
+      bouton.classList.add("bon");
+      messageEl.textContent = "Bonne réponse !";
+    } else {
+      bouton.classList.add("mauvais");
+      boutons[item.bonne].classList.add("bon");
+      messageEl.textContent = "Pas tout à fait. La bonne réponse est affichée en vert.";
+    }
+
+    $("s").textContent = String(score);
+
+    const texte = document.createElement("p");
+    texte.textContent = item.explication;
+    const lien = document.createElement("a");
+    lien.href = item.source;
+    lien.target = "_blank";
+    lien.rel = "noopener";
+    lien.textContent = "Consulter la source : " + item.sourceNom;
+    explicationEl.replaceChildren(texte, lien);
+    explicationEl.hidden = false;
+
+    suiteBtn.textContent = i === Q.length - 1 ? "Voir mon score" : "Suivant";
+    suiteBtn.hidden = false;
+    suiteBtn.focus();
+  }
+
+  function afficherScore() {
+    questionEl.textContent = "Votre score : " + score + " sur " + Q.length;
+    optionsEl.replaceChildren();
+    explicationEl.hidden = true;
+
+    if (score === 8) {
+      messageEl.textContent = "Excellent ! Vous avez suivi de près l’actualité du Burkina Faso.";
+    } else if (score >= 5) {
+      messageEl.textContent = "Bien joué ! Vous connaissez bien les faits marquants de la semaine.";
+    } else if (score >= 3) {
+      messageEl.textContent = "Bon début ! Consultez les sources et revenez tester vos connaissances.";
+    } else {
+      messageEl.textContent = "Continuez à suivre l’actualité : vous ferez mieux au prochain quiz !";
+    }
+
+    suiteBtn.textContent = "Rejouer";
+    suiteBtn.hidden = false;
+    suiteBtn.focus();
+  }
+
+  suiteBtn.addEventListener("click", () => {
+    if (i < Q.length - 1) {
+      i++;
+      afficherQuestion();
+    } else if (i === Q.length - 1) {
+      i = Q.length;
+      afficherScore();
+    } else {
+      i = 0;
+      score = 0;
+      $("s").textContent = "0";
+      afficherQuestion();
+    }
+  });
+
+  afficherQuestion();
 })();
 </script>
-<p><a href="chateaux-forts.html">Lire : les 6 éléments d’un château fort</a></p>
-</main>
-<footer>© 2026 Forteresse Assiégée · <a href="jeux.html">Tous les jeux</a> · <a href="privacy.html">Confidentialité</a> · <a href="a-propos.html">À propos</a></footer>
-</body></html>
+</body>
+</html>
