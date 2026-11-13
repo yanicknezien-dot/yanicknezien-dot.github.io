@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les cloches du château – Forteresse Assiégée</title>
+<meta name="description" content="Jeu de séquence gratuit : mémorisez et répétez l'ordre des cloches, de plus en plus long.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense : collez ici le même script que dans index.html -->
+<style>#p{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:320px}.cl{aspect-ratio:1;border:0;border-radius:18px;cursor:pointer;transition:filter .15s}.cl:focus-visible{outline:3px solid #fff;outline-offset:3px}</style></head><body>
+<header><a class="logo" href="index.html">Forteresse Assiégée</a>
+<nav><a href="index.html">Défense</a><a href="jeux.html">Tous les jeux</a><a href="comment-jouer.html">Comment jouer</a><a href="a-propos.html">À propos</a><a href="privacy.html">Confidentialité</a></nav></header>
+<main>
+<h1>Les cloches du château</h1>
+<p>Regardez l’ordre dans lequel les cloches s’allument, puis répétez-le en touchant les mêmes couleurs. À chaque niveau, la séquence s’allonge d’une cloche.</p>
+<div class="stats"><span>Niveau : <b id="n">0</b></span><span>Record : <b id="r">0</b></span></div>
+<div id="p"></div>
+<p class="msg" id="m" aria-live="polite"></p>
+<button class="btn" id="go">Commencer</button>
+<script>
+(()=>{
+const $=x=>document.getElementById(x),C=['#e5484d','#3b8bd1','#6fae4f','#ffd23f'],N=['rouge','bleue','verte','jaune'];
+let seq=[],pos=0,bloque=true,actif=false,rec=0;
+try{rec=parseInt(localStorage.getItem('clochesRecord'))||0}catch(e){}$('r').textContent=rec;
+const B=C.map((col,k)=>{const b=document.createElement('button');b.className='cl';b.style.background=col;b.style.filter='brightness(.7)';
+  b.setAttribute('aria-label','Cloche '+N[k]);b.onclick=()=>clic(k);$('p').appendChild(b);return b});
+function flash(k){B[k].style.filter='brightness(1.4)';setTimeout(()=>B[k].style.filter='brightness(.7)',350)}
+function suivant(){
+  seq.push(Math.floor(Math.random()*4));pos=0;$('n').textContent=seq.length;$('m').textContent='Regardez…';bloque=true;
+  seq.forEach((k,i)=>setTimeout(()=>flash(k),700*i+500));
+  setTimeout(()=>{bloque=false;$('m').textContent='À vous !'},700*seq.length+500);
+}
+function clic(k){
+  if(bloque||!actif)return;flash(k);
+  if(seq[pos]!==k){actif=false;const nv=seq.length-1;let m='Perdu ! Vous avez réussi '+nv+' niveau'+(nv>1?'x':'')+'.';
+    if(nv>rec){rec=nv;try{localStorage.setItem('clochesRecord',nv)}catch(e){}$('r').textContent=nv;m+=' Nouveau record !'}
+    $('m').textContent=m;$('go').textContent='Rejouer';return}
+  pos++;if(pos===seq.length){bloque=true;$('m').textContent='Bien !';setTimeout(suivant,900)}
+}
+$('go').onclick=()=>{seq=[];actif=true;$('n').textContent=0;suivant()};
+})();
+</script>
+</main>
+<footer>© 2026 Forteresse Assiégée · <a href="jeux.html">Tous les jeux</a> · <a href="privacy.html">Confidentialité</a> · <a href="a-propos.html">À propos</a></footer>
+</body></html>

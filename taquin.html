@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taquin des tours – Forteresse Assiégée</title>
+<meta name="description" content="Jeu de taquin gratuit : remettez les 8 tuiles dans l'ordre en un minimum de coups.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense : collez ici le même script que dans index.html -->
+<style>#g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:330px}.t{aspect-ratio:1;border:0;border-radius:10px;background:#3b8bd1;box-shadow:0 4px 0 #20578a;color:#fff;font:bold 34px "Trebuchet MS",Verdana,sans-serif;cursor:pointer}.t.vide{background:transparent;box-shadow:none;cursor:default}</style></head><body>
+<header><a class="logo" href="index.html">Forteresse Assiégée</a>
+<nav><a href="index.html">Défense</a><a href="jeux.html">Tous les jeux</a><a href="comment-jouer.html">Comment jouer</a><a href="a-propos.html">À propos</a><a href="privacy.html">Confidentialité</a></nav></header>
+<main>
+<h1>Taquin des tours</h1>
+<p>Faites glisser les tuiles vers la case vide pour les ranger de 1 à 8, avec la case vide en bas à droite. Seules les tuiles voisines de la case vide peuvent bouger.</p>
+<div class="stats"><span>Coups : <b id="c">0</b></span></div>
+<div id="g" role="group" aria-label="Plateau"></div>
+<p class="msg" id="m" aria-live="polite"></p>
+<button class="btn" id="n">Nouvelle partie</button>
+<script>
+(()=>{
+const $=x=>document.getElementById(x);let t,c;
+const voisins=i=>{const r=Math.floor(i/3),k=i%3,v=[];if(r>0)v.push(i-3);if(r<2)v.push(i+3);if(k>0)v.push(i-1);if(k<2)v.push(i+1);return v};
+function nouveau(){
+  t=[1,2,3,4,5,6,7,8,0];let v=8;
+  for(let j=0;j<250;j++){const n=voisins(v),p=n[Math.floor(Math.random()*n.length)];[t[v],t[p]]=[t[p],t[v]];v=p}
+  c=0;$('c').textContent=0;$('m').textContent='';aff();
+}
+function aff(){
+  $('g').innerHTML='';
+  t.forEach((x,i)=>{const b=document.createElement('button');b.className='t'+(x?'':' vide');b.textContent=x||'';
+    if(x){b.setAttribute('aria-label','Tuile '+x)}else{b.disabled=true;b.setAttribute('aria-hidden','true')}
+    b.onclick=()=>bouger(i);$('g').appendChild(b)});
+}
+function bouger(i){
+  const v=t.indexOf(0);if(!voisins(i).includes(v))return;
+  [t[i],t[v]]=[t[v],t[i]];c++;$('c').textContent=c;aff();
+  if(t.join('')==='123456780')$('m').textContent='Bravo ! Résolu en '+c+' coups.';
+}
+$('n').onclick=nouveau;nouveau();
+})();
+</script>
+</main>
+<footer>© 2026 Forteresse Assiégée · <a href="jeux.html">Tous les jeux</a> · <a href="privacy.html">Confidentialité</a> · <a href="a-propos.html">À propos</a></footer>
+</body></html>

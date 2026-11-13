@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz des châteaux – Forteresse Assiégée</title>
+<meta name="description" content="Quiz gratuit sur les châteaux : 8 questions sur les donjons, les douves et les grands monuments.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense : collez ici le même script que dans index.html -->
+</head><body>
+<header><a class="logo" href="index.html">Forteresse Assiégée</a>
+<nav><a href="index.html">Défense</a><a href="jeux.html">Tous les jeux</a><a href="comment-jouer.html">Comment jouer</a><a href="a-propos.html">À propos</a><a href="privacy.html">Confidentialité</a></nav></header>
+<main>
+<h1>Quiz des châteaux</h1>
+<p>Huit questions sur les châteaux forts et les grands châteaux du monde. Choisissez une réponse par question.</p>
+<div class="stats"><span>Question <b id="n">1</b>/8</span><span>Score : <b id="s">0</b></span></div>
+<h2 id="q"></h2><div id="o"></div><p class="msg" id="m" aria-live="polite"></p>
+<button class="btn" id="suite" hidden>Suivant</button>
+<script>
+(()=>{
+const Q=[["Comment appelle-t-on la tour principale d’un château fort ?",["Le beffroi","Le donjon","La poterne","Le chemin de ronde"],1],
+["Comment s’appelle le fossé rempli d’eau autour d’un château ?",["Les douves","Les créneaux","Les meurtrières","Les mâchicoulis"],0],
+["Quel pont mobile permettait de fermer l’entrée d’un château ?",["Le pont-levis","Le pont-neuf","Le pont-aqueduc","Le pont suspendu"],0],
+["Quelle grille coulissante bloquait la porte d’un château ?",["La palissade","La herse","Le vantail","Le rideau"],1],
+["Dans quelle région de France se trouve le Mont-Saint-Michel ?",["Bretagne","Provence","Normandie","Alsace"],2],
+["Quel roi a installé la cour à Versailles ?",["Louis XIV","Charlemagne","Napoléon Ier","Henri IV"],0],
+["Dans quel pays se trouve le château de Neuschwanstein ?",["Autriche","Allemagne","Suisse","Pologne"],1],
+["Dans quelle ville espagnole se trouve l’Alhambra ?",["Séville","Madrid","Grenade","Tolède"],2]];
+let i=0,s=0,ok=false;const $=x=>document.getElementById(x);
+function aff(){
+  const[q,r]=Q[i];ok=false;$('q').textContent=q;$('n').textContent=i+1;$('m').textContent='';$('suite').hidden=true;$('o').innerHTML='';
+  r.forEach((t,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>rep(b,k);$('o').appendChild(b)});
+}
+function rep(b,k){
+  if(ok)return;ok=true;const bons=$('o').children;
+  if(k===Q[i][2]){s++;b.classList.add('bon');$('m').textContent='Bonne réponse !'}
+  else{b.classList.add('mauvais');bons[Q[i][2]].classList.add('bon');$('m').textContent='Raté : la bonne réponse est en vert.'}
+  $('s').textContent=s;$('suite').textContent=i<7?'Suivant':'Voir mon score';$('suite').hidden=false;
+}
+$('suite').onclick=()=>{
+  if(i<7){i++;aff()}
+  else if(i===7){i=8;$('q').textContent='Votre score : '+s+' sur 8';$('o').innerHTML='';
+    $('m').textContent=s>=7?'Excellent, vous êtes un vrai châtelain !':s>=4?'Bien joué, encore un essai pour faire mieux ?':'Un bon début, rejouez pour progresser.';
+    $('suite').textContent='Rejouer'}
+  else{i=0;s=0;$('s').textContent=0;aff()}
+};
+aff();
+})();
+</script>
+<p><a href="chateaux-forts.html">Lire : les 6 éléments d’un château fort</a></p>
+</main>
+<footer>© 2026 Forteresse Assiégée · <a href="jeux.html">Tous les jeux</a> · <a href="privacy.html">Confidentialité</a> · <a href="a-propos.html">À propos</a></footer>
+</body></html>

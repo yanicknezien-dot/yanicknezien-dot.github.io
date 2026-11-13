@@ -12,3 +12,12 @@ p,li{max-width:62ch}
 a{color:var(--feu)}
 .jouer{display:inline-block;margin:10px 0 6px;padding:12px 26px;background:var(--feu);color:#fff;font:bold 18px "Trebuchet MS",Verdana,sans-serif;border-radius:12px;text-decoration:none;box-shadow:0 5px 0 #b5510a}
 footer{padding-top:30px;padding-bottom:30px;font:13px "Trebuchet MS",Verdana,sans-serif;color:var(--doux)}
+.stats{display:flex;gap:18px;font:bold 16px "Trebuchet MS",Verdana,sans-serif;margin:8px 0 14px;flex-wrap:wrap}
+.btn{font:bold 17px "Trebuchet MS",Verdana,sans-serif;padding:11px 24px;border:0;border-radius:12px;background:#ff8a2b;color:#fff;box-shadow:0 5px 0 #b5510a;cursor:pointer;margin:8px 8px 0 0}
+.btn:focus-visible,.opt:focus-visible,.t:focus-visible{outline:3px solid #ffd23f;outline-offset:3px}
+.opt{display:block;width:100%;max-width:460px;text-align:left;font:16px "Trebuchet MS",Verdana,sans-serif;padding:12px 14px;margin:8px 0;border:0;border-radius:10px;background:#3b8bd1;color:#fff;box-shadow:0 4px 0 #20578a;cursor:pointer}
+.opt.bon{background:#6fae4f;box-shadow:0 4px 0 #3f7a28}.opt.mauvais{background:#c24545;box-shadow:0 4px 0 #7d2424}
+.msg{min-height:1.6em;font-weight:bold;color:#ffd23f}
+.carte-jeu{display:block;background:#2a3048;border-radius:12px;padding:14px 16px;margin:10px 0;text-decoration:none;color:#e6eaf7}
+.carte-jeu b{color:#ffd23f;font-family:"Trebuchet MS",Verdana,sans-serif;font-size:19px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
